@@ -4,7 +4,7 @@ Head::Head(int startX, int startY) {
 	position.x = startX;
 	position.y = startY;
 
-	headShape.setSize(sf::Vector2f(5, 5));
+	headShape.setSize(sf::Vector2f(20, 20));
 	headShape.setPosition(position);
 }
 
@@ -15,23 +15,41 @@ sf::FloatRect Head::getPosition() {
 sf::RectangleShape Head::getShape() {
 	return headShape;
 }
-
-void Head::moveLeft() {
-	position.x -= speed;
-}
-
-void Head::moveRight() {
-	position.x += speed;
-}
-
-void Head::moveUp() {
-	position.y += speed;
-}
-
-void Head::moveDown() {
-	position.y -= speed;
-}
-
 void Head::update() {
+	switch (dir) {
+		case LEFT:
+			position.x -= speed;
+			break;
+		case RIGHT:
+			position.x += speed;
+			break;
+		case UP:
+			position.y -= speed;
+			break;
+		case DOWN:
+			position.y += speed;
+			break;
+	}
 	headShape.setPosition(position);
+}
+
+void Head::setLeft() {
+	if (dir != RIGHT) {
+		dir = LEFT;
+	}
+}
+void Head::setRight() {
+	if (dir != LEFT) {
+		dir = RIGHT;
+	}
+}
+void Head::setUp() {
+	if (dir != DOWN) {
+		dir = UP;
+	}
+}
+void Head::setDown() {
+	if (dir != UP) {
+		dir = DOWN;
+	}
 }

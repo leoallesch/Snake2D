@@ -7,17 +7,19 @@ private:
 
 	sf::RectangleShape headShape;
 
-	float speed = 0.3f;
+	enum direction { STOP = 0, LEFT, RIGHT, UP, DOWN };
+	direction dir = STOP;
+
+	float speed = 0.1f;
 public:
 	Head(int startX, int startY);
 
 	sf::FloatRect getPosition();
 
 	sf::RectangleShape getShape();
-
-	void moveLeft();
-	void moveRight();
-	void moveUp();
-	void moveDown();
+	void setLeft();
+	void setRight();
+	void setUp();
+	void setDown();
 	void update();
 };
