@@ -10,13 +10,18 @@ private:
 	enum direction { STOP = 0, LEFT, RIGHT, UP, DOWN };
 	direction dir = STOP;
 
-	float speed = 0.1f;
+	int speed = 5;
+
 public:
 	Head(int startX, int startY);
 
 	sf::FloatRect getPosition();
 
 	sf::RectangleShape getShape();
+
+	int getX();
+	int getY();
+
 	void setLeft();
 	void setRight();
 	void setUp();

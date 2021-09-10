@@ -1,17 +1,35 @@
 #include <SFML/Graphics.hpp>
 
+#include <cstdlib>
+
 #include "Head.h"
+#include "Fruit.h"
 
 int main()
 {
-    int windowWidth = 1024;
-    int windowHeight = 720;
+    int windowWidth = 1200;
+    int windowHeight = 725;
+
+    int randX, randY;
 
     sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Snake2D");
+
+    window.setFramerateLimit(60);
+
+    sf::Clock clock;
 
     int score = 0;
 
     Head head(windowWidth / 2, windowHeight / 2);
+
+    randX = rand() % windowWidth + 1;
+    randY = rand() % windowHeight + 1;
+    while (randX == head.getX() && randY == head.getY()) {
+        randX = rand() % windowWidth + 1;
+        randY = rand() % windowHeight + 1;
+    }
+    
+    Fruit fruit(randX, randY);
 
     while (window.isOpen())
     {
@@ -31,9 +49,22 @@ int main()
             head.setDown();
         }
         head.update();
+        if (head.getPosition() == fruit.getPosition()) {
+            randX = rand() % windowWidth + 1;
+            randY = rand() % windowHeight + 1;
+            while (randX == head.getX() && randY == head.getY()) {
+                randX = rand() % windowWidth + 1;
+                randY = rand() % windowHeight + 1;
+            }
+            fruit.update(randX,randY);
+        }
+
+        sf::Time time = clock.getElapsedTime();
+        clock.restart().asSeconds();
 
         window.clear(sf::Color());
         window.draw(head.getShape());
+        window.draw(fruit.getShape());
         window.display();
     }
 

@@ -4,8 +4,9 @@ Head::Head(int startX, int startY) {
 	position.x = startX;
 	position.y = startY;
 
-	headShape.setSize(sf::Vector2f(20, 20));
+	headShape.setSize(sf::Vector2f(25, 25));
 	headShape.setPosition(position);
+	headShape.setFillColor(sf::Color::Green);
 }
 
 sf::FloatRect Head::getPosition() {
@@ -52,4 +53,10 @@ void Head::setDown() {
 	if (dir != UP) {
 		dir = DOWN;
 	}
+}
+int Head::getX(){
+	return position.x;
+}
+int Head::getY() {
+	return position.y;
 }
