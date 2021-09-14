@@ -16,6 +16,7 @@ sf::FloatRect Head::getPosition() {
 sf::RectangleShape Head::getShape() {
 	return headShape;
 }
+
 void Head::update() {
 	switch (dir) {
 		case LEFT:
@@ -39,24 +40,40 @@ void Head::setLeft() {
 		dir = LEFT;
 	}
 }
+
 void Head::setRight() {
 	if (dir != LEFT) {
 		dir = RIGHT;
 	}
 }
+
 void Head::setUp() {
 	if (dir != DOWN) {
 		dir = UP;
 	}
 }
+
 void Head::setDown() {
 	if (dir != UP) {
 		dir = DOWN;
 	}
 }
+
 int Head::getX(){
 	return position.x;
 }
+
 int Head::getY() {
 	return position.y;
+}
+
+bool Head::checkWall(int windowWidth, int windowHeight) {
+	bool inBounds = true;
+	if (position.x < 0 || position.x > windowWidth) {
+		inBounds = false;
+	}
+	else if (position.y < 0 || position.y > windowHeight) {
+		inBounds = false;
+	}
+	return inBounds;
 }

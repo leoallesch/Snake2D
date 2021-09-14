@@ -7,32 +7,34 @@
 
 int main()
 {
-    int windowWidth = 1200;
-    int windowHeight = 725;
+    int windowWidth = 600;
+    int windowHeight = 600;
 
     int randX, randY;
 
     sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Snake2D");
 
-    window.setFramerateLimit(60);
-
     sf::Clock clock;
+    sf::Time elapsed;
 
     int score = 0;
 
     Head head(windowWidth / 2, windowHeight / 2);
 
-    randX = rand() % windowWidth + 1;
-    randY = rand() % windowHeight + 1;
+    randX = (rand() % ((windowWidth - 1) / 25) + 1) * 25;
+    randY = (rand() % ((windowHeight - 1) / 25) + 1) * 25;
+    
     while (randX == head.getX() && randY == head.getY()) {
-        randX = rand() % windowWidth + 1;
-        randY = rand() % windowHeight + 1;
+        randX = (rand() % ((windowWidth - 1) / 25) + 1) * 25;
+        randY = (rand() % ((windowHeight - 1) / 25) + 1) * 25;
     }
     
     Fruit fruit(randX, randY);
 
     while (window.isOpen())
     {
+        elapsed = clock.getElapsedTime();
+
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -48,19 +50,23 @@ int main()
         } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
             head.setDown();
         }
-        head.update();
+        if (elapsed.asSeconds() >= 0.14) {
+            head.update();
+            clock.restart();
+        }
+        if (!head.checkWall(windowWidth, windowHeight)) {
+            window.close();
+        }
         if (head.getPosition() == fruit.getPosition()) {
-            randX = rand() % windowWidth + 1;
-            randY = rand() % windowHeight + 1;
+            score++;
+            randX = (rand() % ((windowWidth - 1) / 25) + 1) * 25;
+            randY = (rand() % ((windowHeight - 1) / 25) + 1) * 25;
             while (randX == head.getX() && randY == head.getY()) {
-                randX = rand() % windowWidth + 1;
-                randY = rand() % windowHeight + 1;
+                randX = (rand() % ((windowWidth - 1) / 25) + 1) * 25;
+                randY = (rand() % ((windowHeight - 1) / 25) + 1) * 25;
             }
             fruit.update(randX,randY);
         }
-
-        sf::Time time = clock.getElapsedTime();
-        clock.restart().asSeconds();
 
         window.clear(sf::Color());
         window.draw(head.getShape());

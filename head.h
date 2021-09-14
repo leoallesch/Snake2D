@@ -10,8 +10,7 @@ private:
 	enum direction { STOP = 0, LEFT, RIGHT, UP, DOWN };
 	direction dir = STOP;
 
-	int speed = 5;
-
+	int speed = 25;
 public:
 	Head(int startX, int startY);
 
@@ -27,4 +26,6 @@ public:
 	void setUp();
 	void setDown();
 	void update();
+
+	bool checkWall(int windowWidth, int windowHeight);
 };
