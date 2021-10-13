@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AssetMan.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMan.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AssetMan.cpp" />
     <ClCompile Include="StateMan.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

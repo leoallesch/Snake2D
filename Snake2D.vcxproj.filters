@@ -21,9 +21,15 @@
     <ClInclude Include="StateMan.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AssetMan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StateMan.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetMan.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
