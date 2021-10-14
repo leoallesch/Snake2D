@@ -23,8 +23,8 @@ namespace Engine
 		void AddTexture(int id, const std::string  &filePath, bool wantRepeated = false);
 		void AddFont(int id, const std::string& filePath);
 
-		const sf::Texture& GetTexture() const;
-		const sf::Font &GetFont() const;
+		const sf::Texture& GetTexture(int id) const;
+		const sf::Font &GetFont(int id) const;
 
 	};
 
